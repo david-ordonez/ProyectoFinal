@@ -1,4 +1,4 @@
-const fm = require('./filemanager');
+const fm = require('../util/filemanager');
 
 class Contenedor {
     constructor(fileName) {
@@ -7,17 +7,17 @@ class Contenedor {
 
     async save(item) {
         try {
-            const products = await fm.readFile(this._fileName);
-            const ultimoId = products.length > 0 ? products[products.length - 1].id : 0;
+            const items = await fm.readFile(this._fileName);
+            const ultimoId = items.length > 0 ? items[items.length - 1].id : 0;
             const nuevoId = ultimoId + 1;
 
-            const newProduct = {...item,id: nuevoId };
+            const newItem = {...item,id: nuevoId, timestamp: Date.now() };
 
-            products.push(newProduct);
+            items.push(newItem);
             
-            await fm.saveFile(this._fileName,JSON.stringify(products,null,2));
+            await fm.saveFile(this._fileName,JSON.stringify(items,null,2));
 
-            return nuevoId;
+            return newItem;
 
         } catch (error) {
             console.log(error);

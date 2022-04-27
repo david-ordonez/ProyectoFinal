@@ -4,19 +4,37 @@ const Contenedor = require('./contenedor');
 
 const app = express();
 app.use(express.static('public'));
-
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
 // router de productos y carrito
 const productos = new Contenedor('productos.json');
 const carrito = new Contenedor('carrito.json');
+const isAdmin = false;
 
 const productosRouter = new Router();
 const carritoRouter = new Router();
-productosRouter.use(express.json());
-productosRouter.use(express.urlencoded({extended: true}));
+
+
+function verificarAdmin(req, res, next){
+    if(isAdmin)
+        next();
+    else
+        res.status(401).send({
+            error: -1,
+            descripcion: `La ruta ${req.baseUrl} metodo ${req.method} no implementada`
+        });
+}
 
 // servidor
 app.use('/api/productos', productosRouter);
 app.use('/api/carrito', carritoRouter);
+
+app.use((req, res, next) => {
+    res.status(404).send({
+        error: -2,
+        descripcion: `La ruta ${req.originalUrl} metodo ${req.method} no implementada`
+    });
+});
 
 const PORT = process.env.PORT || 8080;
 const server = app.listen(PORT, () => {
@@ -26,100 +44,107 @@ server.on("error", error => console.log(`Error en servidor ${error}`));
 
 //RUTAS LLAMANDO A LOS METODOS DE LA CLASE
 
-productosRouter.get('/', (req, res) => {
-    res.send(productos.getAll());
+productosRouter.get('/', async (req, res) => {
+    res.send(await productos.getAll());
 })
 
-productosRouter.get('/:id', (req, res) => {
+productosRouter.get('/:id',async (req, res) => {
     const id = parseInt(req.params.id);
-    const producto = buscarProducto(id);
+    const producto = await buscarProducto(id);
     if(producto)
         return res.send(producto);
 
     res.status(404).send({ error: 'Producto no encontrado' });
 })
 
-productosRouter.post('/', (req, res) => {
+productosRouter.post('/', verificarAdmin, async (req, res) => {
     const newProducto = req.body;
-    if (newProducto)
-        return res.send(productos.save(newProducto));
+    if (newProducto){
+        const item = await productos.save(newProducto)
+        return res.send(item);
+    }
 
     res.status(400).send({ error: 'Error al agregar' })
 })
 
-productosRouter.put('/:id', (req, res) => {
+productosRouter.put('/:id', verificarAdmin, async (req, res) => {
     const id = parseInt(req.params.id);
     const nuevoProducto = req.body;
     if (buscarProducto(id))
-        return res.send(productos.update(id, nuevoProducto));
+        return res.send(await productos.update(id, nuevoProducto));
     res.status(404).send({ error: 'Producto no encontrado' });
 })
 
-productosRouter.delete('/:id', (req, res) => {
+productosRouter.delete('/:id', verificarAdmin,async (req, res) => {
     const id = parseInt(req.params.id);
     if (buscarProducto(id))
-        return res.send(productos.DeleteById(id));
+        return res.send(await productos.DeleteById(id));
 
     res.status(404).send({ error: 'Producto no encontrado' });
 })
 
-const buscarProducto = (id) => {
-    const producto = productos.getById(id)
+const buscarProducto = async (id) => {
+    const producto = await productos.getById(id)
     return producto;
 }
 
 /****************************End points de carrito    ************************************************* */
-carritoRouter.get('/', (req, res) => {
-    res.send(carrito.getAll());
+carritoRouter.get('/', async (req, res) => {
+    res.send(await carrito.getAll());
 })
 
-carritoRouter.post('/', (req, res) => {
+carritoRouter.post('/', async (req, res) => {
     const newCarrito = req.body;
     if (newCarrito)
-        return res.send(carrito.save(newCarrito));
+        return res.send(await carrito.save(newCarrito));
 
     res.status(400).send({ error: 'Error al agregar' })
 })
 
 
-carritoRouter.delete('/:id', (req, res) => {
+carritoRouter.delete('/:id', async (req, res) => {
     const id = parseInt(req.params.id);
     if (buscarCarrito(id))
-        return res.send(carrito.DeleteById(id));
+        return res.send(await carrito.DeleteById(id));
 
     res.status(404).send({ error: 'carrito no encontrado' });
 })
 
-carritoRouter.get('/:id/productos', (req, res) => {
+carritoRouter.get('/:id/productos', async (req, res) => {
     const id = parseInt(req.params.id);
-    const carrito = buscarCarrito(id);
+    const carrito = await buscarCarrito(id);
     if(carrito){
         res.send(carrito.productos);
     }
     res.status(404).send({ error: 'Carrito no encontrado' });
 })
 
-carritoRouter.post('/:id/productos', (req, res) => {
+carritoRouter.post('/:id/productos',async (req, res) => {
     const id = parseInt(req.params.id);
-
-    const carritoReq = buscarCarrito(id);
-    if(carrito && carrito.productos){
-        const newProducto = buscarProducto(id)
+º
+    const carritoReq = await buscarCarrito(id);
+    if(carritoReq && carritoReq.productos){
+        const newProducto = await buscarProducto(id)
         carritoReq.productos.push(newProducto)
-        carrito.update(id, carritoReq);
+        return res.send(carrito.update(id, carritoReq));
     }
     res.status(404).send({ error: 'Producto no encontrado' });
 })
 
-carritoRouter.delete('/:id/productos/:id_prod', (req, res) => {
+carritoRouter.delete('/:id/productos/:id_prod', async (req, res) => {
     const id = parseInt(req.params.id);
-    if (buscarCarrito(id))
-        return res.send(carrito.DeleteById(id));
-    /*TODO: DELETE: '/:id/productos/:id_prod' - Eliminar un producto del carrito por su id de carrito y de producto*/
-    res.status(404).send({ error: 'Producto no encontrado' });
+    const carritoReq = await buscarCarrito(id)
+    if(carritoReq){
+        const id_prod = parseInt(req.params.id_prod);
+        const filteredProductos = carritoReq.productos.filter(element => element.id !== id_prod);
+        carritoReq.productos = filteredProductos;
+        return res.send(await carrito.update(id,carritoReq));
+    }
+       
+    res.status(404).send({ error: 'Carrito no encontrado' });
 })
 
-const buscarCarrito = (id) => {
-    const carrito = carrito.getById(id)
+const buscarCarrito = async (id) => {
+    const carrito = await carrito.getById(id)
     return carrito;
 }
