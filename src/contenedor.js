@@ -62,17 +62,27 @@ class Contenedor {
 
     async update(id, item){
         try {
-            const oldItem = this.getById(id);
+            const items = await fm.readFile(this._fileName);
+            const oldItemIndex = items.findIndex(element => element.id === id);
+            if(oldItemIndex == -1 ) 
+                throw new error('Elemento no encontrado');
+            
+            const oldItem = items[oldItemIndex];
+            
             Object.keys(oldItem).forEach(key => {
                 if(item.hasOwnProperty(key))
                     oldItem[key] = item[key];
             });
+
+            await fm.saveFile(this._fileName,JSON.stringify(items,null,2));
             return oldItem;
             
         } catch (error) {
-            
+            console.log(error);
         }
     }
+
+    
 }
 
 module.exports = Contenedor;

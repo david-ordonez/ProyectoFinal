@@ -9,7 +9,7 @@ app.use(express.urlencoded({extended: true}));
 // router de productos y carrito
 const productos = new Contenedor('productos.json');
 const carrito = new Contenedor('carrito.json');
-const isAdmin = false;
+const isAdmin = true;
 
 const productosRouter = new Router();
 const carritoRouter = new Router();
@@ -21,7 +21,7 @@ function verificarAdmin(req, res, next){
     else
         res.status(401).send({
             error: -1,
-            descripcion: `La ruta ${req.baseUrl} metodo ${req.method} no implementada`
+            descripcion: `La ruta ${req.baseUrl} metodo ${req.method} no autorizada`
         });
 }
 
@@ -114,14 +114,13 @@ carritoRouter.get('/:id/productos', async (req, res) => {
     const id = parseInt(req.params.id);
     const carrito = await buscarCarrito(id);
     if(carrito){
-        res.send(carrito.productos);
+        return res.send(carrito.productos);
     }
     res.status(404).send({ error: 'Carrito no encontrado' });
 })
 
 carritoRouter.post('/:id/productos',async (req, res) => {
     const id = parseInt(req.params.id);
-º
     const carritoReq = await buscarCarrito(id);
     if(carritoReq && carritoReq.productos){
         const newProducto = await buscarProducto(id)
