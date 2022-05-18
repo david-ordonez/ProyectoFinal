@@ -1,13 +1,13 @@
 const fm = require('../util/filemanager');
 
-class Contenedor {
-    constructor(fileName) {
-        this._fileName = fileName;
+class ContenedorArchivo {
+    constructor(ruta) {
+        this.ruta = ruta;
     }
 
-    async save(item) {
+    async guardar(item) {
         try {
-            const items = await fm.readFile(this._fileName);
+            const items = await fm.readFile(this.ruta);
             const ultimoId = items.length > 0 ? items[items.length - 1].id : 0;
             const nuevoId = ultimoId + 1;
 
@@ -15,7 +15,7 @@ class Contenedor {
 
             items.push(newItem);
             
-            await fm.saveFile(this._fileName,JSON.stringify(items,null,2));
+            await fm.saveFile(this.ruta,JSON.stringify(items,null,2));
 
             return newItem;
 
@@ -24,45 +24,45 @@ class Contenedor {
         }
     }
 
-    async getById(id) {
+    async listar(id) {
         try {
-            const items = await fm.readFile(this._fileName);
+            const items = await fm.readFile(this.ruta);
             return items.find(element => element.id === id);
         } catch (error) {
             console.log(error);
         }
     }
 
-    async getAll() {
+    async listarAll() {
         try {
-            const items = await fm.readFile(this._fileName);
+            const items = await fm.readFile(this.ruta);
             return items;       
         } catch (error) {
             throw error;
         }
     }
 
-    async deleteById(id) {
+    async borrar(id) {
         try {
-            const items = await fm.readFile(this._fileName);
+            const items = await fm.readFile(this.ruta);
             const filterItems = items.filter(element => element.id !== id);            
-            await fm.saveFile(this._fileName,JSON.stringify(filterItems,null,2));
+            await fm.saveFile(this.ruta,JSON.stringify(filterItems,null,2));
         } catch (error) {
             console.log(error);
         }
     }
 
-    async deleteAll() {
+    async borrarAll() {
         try {
-            const data = await fm.saveFile(this._fileName, '');
+            const data = await fm.saveFile(this.ruta, '');
         } catch (error) {
             console.log(error);
         }
     }
 
-    async update(id, item){
+    async actualizar(id, item){
         try {
-            const items = await fm.readFile(this._fileName);
+            const items = await fm.readFile(this.ruta);
             const oldItemIndex = items.findIndex(element => element.id === id);
             if(oldItemIndex == -1 ) 
                 throw new error('Elemento no encontrado');
@@ -74,15 +74,13 @@ class Contenedor {
                     oldItem[key] = item[key];
             });
 
-            await fm.saveFile(this._fileName,JSON.stringify(items,null,2));
+            await fm.saveFile(this.ruta,JSON.stringify(items,null,2));
             return oldItem;
             
         } catch (error) {
             console.log(error);
         }
-    }
-
-    
+    }    
 }
 
 module.exports = Contenedor;

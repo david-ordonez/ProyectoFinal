@@ -1,14 +1,16 @@
-const express = require('express');
+import express from 'express';
 const { Router } = express;
-const Contenedor = require('./contenedor');
+
+import {
+    productosDao as productos,
+    carritosDao as carrito
+} from './daos/index.js'
 
 const app = express();
 app.use(express.static('public'));
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 // router de productos y carrito
-const productos = new Contenedor('productos.json');
-const carrito = new Contenedor('carrito.json');
 const isAdmin = true;
 
 const productosRouter = new Router();
