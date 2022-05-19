@@ -3,7 +3,7 @@ export default {
     dbFolder: "./DB/",
   },
   mongodb: {
-    url: "mongodb://localhost:27017/colegio",
+    url: "mongodb://localhost:27017/ecommerce",
   },
   firebase: {
     databaseURL: "https://coderhouse-725d3.firebaseio.com",
@@ -37,7 +37,7 @@ export default {
       host: "127.0.0.1",
       user: "root",
       password: "my-secret-pw",
-      database: "coderhouse",
+      database: "ecommerce",
     },
   },
 };
