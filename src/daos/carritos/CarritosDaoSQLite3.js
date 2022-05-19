@@ -1,8 +1,10 @@
-import CarritosDaoSQL from "./CarritosDaoSQL.js"
-import config from '../../config.js'
+import ContenedorSQL from "../../contenedores/ContenedorSQL.js"
 
-class CarritosDaoSQLite3 extends CarritosDaoSQL {
 
+class CarritosDaoSQLite3 extends ContenedorSQL {
+    constructor(){
+        super('carrito');
+    }
 }
 
 export default CarritosDaoSQLite3

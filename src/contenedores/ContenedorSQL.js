@@ -1,14 +1,15 @@
 import knex from 'knex'
+import config from '../config.js'
 import { asPOJO } from '../utils/objectUtils.js'
 
 class ContenedorSQL {
-    constructor(config, tabla) {
-        this.knex = knex(config)
+    constructor(tabla) {
+        this.knex = knex(config.sqlite3)
         this.tabla = tabla
     }
 
     async guardar(item) {
-        return await this.knex.from(this.tabla).insert(elem);
+        return await this.knex.from(this.tabla).insert(item);
     }
 
     async listar(id) {
@@ -28,7 +29,7 @@ class ContenedorSQL {
     }
 
     async actualizar(id, item){
-
+        return await this.knex.from(this.tabla).where('id', id).update(item);
     }    
 }
 

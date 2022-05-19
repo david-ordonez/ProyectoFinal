@@ -2,9 +2,9 @@ import admin from "firebase-admin"
 import config from '../config.js'
 
 class ContenedorFirebase {
-    constructor(config, databaseURL, collection) {
+    constructor(databaseURL, collection) {
         admin.initializeApp({
-            credential: admin.credential.cert(config),
+            credential: admin.credential.cert(config.cert),
             databaseURL: databaseURL
         });
 
