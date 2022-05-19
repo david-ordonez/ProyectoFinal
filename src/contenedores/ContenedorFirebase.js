@@ -2,10 +2,10 @@ import admin from "firebase-admin"
 import config from '../config.js'
 
 class ContenedorFirebase {
-    constructor(databaseURL, collection) {
+    constructor(collection) {
         admin.initializeApp({
-            credential: admin.credential.cert(config.cert),
-            databaseURL: databaseURL
+            credential: admin.credential.cert(config.firebase.cert),
+            databaseURL: config.firebase.databaseURL
         });
 
         const db = admin.firestore();

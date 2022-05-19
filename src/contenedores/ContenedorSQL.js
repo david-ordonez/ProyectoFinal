@@ -1,10 +1,8 @@
 import knex from 'knex'
-import config from '../config.js'
-import { asPOJO } from '../utils/objectUtils.js'
 
 class ContenedorSQL {
-    constructor(tabla) {
-        this.knex = knex(config.sqlite3)
+    constructor(config, tabla) {
+        this.knex = knex(config)
         this.tabla = tabla
     }
 

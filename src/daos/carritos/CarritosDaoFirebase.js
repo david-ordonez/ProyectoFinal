@@ -1,10 +1,9 @@
 import ContenedorFirebase from "../../contenedores/ContenedorFirebase.js"
-import config from '../../config.js'
+
 class CarritosDaoFirebase extends ContenedorFirebase {
     constructor() {
-        super(config.firebase.databaseURL, 'carrito')
+        super('carrito')
     }
-
 }
 
 export default CarritosDaoFirebase

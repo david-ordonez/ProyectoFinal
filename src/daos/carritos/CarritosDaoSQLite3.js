@@ -1,9 +1,10 @@
 import ContenedorSQL from "../../contenedores/ContenedorSQL.js"
+import config from '../../config.js'
 
 
 class CarritosDaoSQLite3 extends ContenedorSQL {
     constructor(){
-        super('carrito');
+        super(config.sqlite3,'carrito');
     }
 }
 
