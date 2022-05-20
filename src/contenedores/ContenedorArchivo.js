@@ -1,4 +1,4 @@
-const fm = require('../util/filemanager');
+import fm from '../utils/filemanager.js';
 
 class ContenedorArchivo {
     constructor(ruta) {
@@ -83,4 +83,4 @@ class ContenedorArchivo {
     }    
 }
 
-module.exports = Contenedor;
+export default ContenedorArchivo;

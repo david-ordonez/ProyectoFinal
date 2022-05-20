@@ -1,4 +1,3 @@
-import { Decimal128 } from "mongodb";
 import mongoose from "mongoose";
 import * as model from './producto.js';
 

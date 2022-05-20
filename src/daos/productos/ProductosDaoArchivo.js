@@ -1,4 +1,5 @@
 import ContenedorArchivo from "../../contenedores/ContenedorArchivo.js"
+import config from '../../config.js'
 
 class ProductosDaoArchivo extends ContenedorArchivo {
     constructor() {

@@ -4,7 +4,7 @@ import config from '../config.js'
 class ContenedorFirebase {
     constructor(collection) {
         admin.initializeApp({
-            credential: admin.credential.cert(config.firebase.cert),
+            credential: admin.credential.cert(config.firebase.jsonConfig),
             databaseURL: config.firebase.databaseURL
         });
 
@@ -49,7 +49,8 @@ class ContenedorFirebase {
 
     async actualizar(id, item){
         const doc = query.doc(`${id}`);
-        let item = await doc.update(item)
+        let itemUpdated = await doc.update(item)
+        return itemUpdated;
     }    
 }
 

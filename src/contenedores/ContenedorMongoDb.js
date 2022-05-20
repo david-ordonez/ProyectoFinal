@@ -3,37 +3,37 @@ import config from '../config.js'
 
 class ContenedorMongoDb {
 
-    constructor(schema){
-        await mongoose.connect(config.mongodb.url,{
+    constructor(modelSchema){
+        mongoose.connect(config.mongodb.url,{
             useNewUrlParser: true,
             useUnifiedTopology: true
         }) ;
 
-        this.model = schema;
+        this.modelSchema = modelSchema;
     }
 
     async guardar(item) {
-        return await this.model.create(item);
+        return await this.modelSchema.create(item);
     }
 
     async listar(id) {
-        return await this.model.find({id: `${id}`});
+        return await this.modelSchema.find({id: `${id}`});
     }
 
     async listarAll() {
-        return await this.model.find({});
+        return await this.modelSchema.find({});
     }
 
     async borrar(id) {
-        return await this.model.deleteOne({id: `${id}`});
+        return await this.modelSchema.deleteOne({id: `${id}`});
     }
 
     async borrarAll() {
-        return await this.model.deleteMany({});
+        return await this.modelSchema.deleteMany({});
     }
 
     async actualizar(id, item){
-        return await this.model.findOneAndUpdate({id: `${id}`}, item, { new: true });
+        return await this.modelSchema.findOneAndUpdate({id: `${id}`}, item, { new: true });
     }    
 }
 
