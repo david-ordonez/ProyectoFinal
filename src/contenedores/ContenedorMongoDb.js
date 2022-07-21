@@ -4,10 +4,7 @@ import config from '../config.js'
 class ContenedorMongoDb {
 
     constructor(modelSchema){
-        mongoose.connect(config.mongodb.url,{
-            useNewUrlParser: true,
-            useUnifiedTopology: true
-        }) ;
+        mongoose.connect(config.mongodb) ;
 
         this.modelSchema = modelSchema;
     }

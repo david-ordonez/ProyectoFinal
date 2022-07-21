@@ -1,9 +1,15 @@
 export default {
+  tipoInicio : process.env.INICIO || 'fork',
+  port: process.env.PORT || 8080,
   fileSystem: {
     dbFolder: "./DB/",
   },
   mongodb: {
-    url: "mongodb://localhost:27017/ecommerce",
+    url: 'mongodb+srv://dordonez:00Gd801011_@cluster0.thmqy.mongodb.net/ecommerce',
+    mongoOptions: { 
+      useNewUrlParser: true, 
+      useUnifiedTopology: true 
+    }
   },
   firebase: {
     databaseURL: "https://coderhouse-725d3.firebaseio.com",
