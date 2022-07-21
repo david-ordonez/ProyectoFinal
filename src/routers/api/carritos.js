@@ -2,7 +2,7 @@ import { Router } from "express";
 import {
   carritosDao as carrito,
   productosDao as productos,
-} from "./daos/index.js";
+} from "../../daos/index.js";
 
 const carritoRouter = new Router();
 

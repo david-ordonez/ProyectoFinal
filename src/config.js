@@ -5,7 +5,7 @@ export default {
     dbFolder: "./DB/",
   },
   mongodb: {
-    url: 'mongodb+srv://dordonez:00Gd801011_@cluster0.thmqy.mongodb.net/ecommerce',
+    mongoUrl: 'mongodb+srv://dordonez:00Gd801011_@cluster0.thmqy.mongodb.net/ecommerce',
     mongoOptions: { 
       useNewUrlParser: true, 
       useUnifiedTopology: true 

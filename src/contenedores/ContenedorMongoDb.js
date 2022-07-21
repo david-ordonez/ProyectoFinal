@@ -4,7 +4,7 @@ import config from '../config.js'
 class ContenedorMongoDb {
 
     constructor(modelSchema){
-        mongoose.connect(config.mongodb) ;
+        mongoose.connect(config.mongodb.mongoUrl) ;
 
         this.modelSchema = modelSchema;
     }

@@ -1,5 +1,6 @@
 import { Router } from 'express';
-import { productosDao as productos } from './daos/index.js'
+import { productosDao as productos } from '../../daos/index.js'
+import verificarAdmin from '../middleware/authmw.js';
 
 const productosRouter = new Router();
 

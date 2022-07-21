@@ -20,7 +20,7 @@ app.set("view engine", "ejs");
 
 app.use(
   session({
-    store: MongoStore.create(config.mongoRemote),
+    store: MongoStore.create(config.mongodb),
     secret: "secreto",
     resave: false,
     saveUninitialized: false,
@@ -62,7 +62,7 @@ if(config.tipoInicio == 'cluster'){
   }
 
 function iniciarServer(){
-    conectarDB(config.mongodb.url, (err) => {
+    conectarDB(config.mongodb.mongoUrl, (err) => {
         if(err) return logger.fatal(`${err} - Error al conectar con la BD`)
         logger.info('Base de datos conectada');
 
