@@ -41,13 +41,18 @@ passport.use('login', new LocalStrategy(
   
         const newUser = {
             username: username,
-            password: createHash(password)
+            password: createHash(password),
+            nombre: req.body.nombre,
+            direccion: req.body.direccion,
+            fechaNac: req.body.fechaNac,
+            telefono: req.body.telefono
         }
   
         User.create(newUser, (err, userWithId) => {
             if (err) {
                 return done(err);
             }
+
             return done(null, userWithId);
         })
     })
