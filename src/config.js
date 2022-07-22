@@ -2,13 +2,15 @@ export default {
   mailOptions : {
     from: 'Servidor Node.js',
     to: '',
-    subject: 'Mail de prueba desde Node.js con gmail',
-    html: '<h1 style="color: blue;">Contenido de prueba desde <span style="color: green">Node js</span></h1>',
+    subject: 'Nuevo registro',
+    html: '',
   },
   mailHost : 'daordonezg@gmail.com',
   mailClave: 'tiqwjnxulmcbptwu',
   mailService: 'gmail',
   mailPort: 587,
+  mailAdmin: 'david.ordonez@live.com.mx',
+  contactoAdmin: '+5215534027869',
   tipoInicio : process.env.INICIO || 'fork',
   port: process.env.PORT || 8080,
   fileSystem: {

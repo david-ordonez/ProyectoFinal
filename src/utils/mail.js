@@ -11,9 +11,10 @@ const transporter = createTransport({
     }
 });
 
-export function sendMail(emailTo){
+export async function sendMail(emailTo, mensaje){
     try {
         config.mailOptions.to = emailTo
+        config.mailOptions.html = `<h1> Nuevo registro </h1><br><p>${mensaje}</p>`
         return await transporter.sendMail(config.mailOptions);
     } catch (error) {
         logger.error(`Error enviando correo ${error}`)

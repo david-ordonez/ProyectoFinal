@@ -6,6 +6,8 @@ import passport from "passport";
 import LocalStrategy from "passport-local";
 import bCrypt from 'bcrypt';
 import User from '../../models/usuarios.js'
+import { sendMail } from '../../utils/mail.js';
+import config from '../../config.js';
 
 
 const __dirname = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../../views/');
@@ -48,10 +50,12 @@ passport.use('login', new LocalStrategy(
             telefono: req.body.telefono
         }
   
-        User.create(newUser, (err, userWithId) => {
+        User.create(newUser, async (err, userWithId) => {
             if (err) {
                 return done(err);
             }
+            
+            await sendMail(config.mailAdmin, JSON.stringify(newUser));
 
             return done(null, userWithId);
         })
