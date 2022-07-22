@@ -9,27 +9,27 @@ class ContenedorMongoDb {
         this.modelSchema = modelSchema;
     }
 
-    async guardar(item) {
+    async save(item) {
         return await this.modelSchema.create(item);
     }
 
-    async listar(id) {
+    async getById(id) {
         return await this.modelSchema.find({id: `${id}`});
     }
 
-    async listarAll() {
+    async getAll() {
         return await this.modelSchema.find({});
     }
 
-    async borrar(id) {
+    async deleteById(id) {
         return await this.modelSchema.deleteOne({id: `${id}`});
     }
 
-    async borrarAll() {
+    async deleteAll() {
         return await this.modelSchema.deleteMany({});
     }
 
-    async actualizar(id, item){
+    async update(id, item){
         return await this.modelSchema.findOneAndUpdate({id: `${id}`}, item, { new: true });
     }    
 }

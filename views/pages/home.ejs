@@ -27,38 +27,21 @@
 
     <div class="container mt-3">
         <div class="jumbotron">
-            <h1>Ingrese Producto</h1>
+            <h1>Menu</h1>
             <br>
-
-            <form id="formAgregarProducto">
-                <!-- Campo nombre del producto -->
-                <div class="form-group">
-                    <label for="nombre">Nombre</label>
-                    <input id="nombre" class="form-control" type="text" name="title" required>
-                </div>
-
-                <!-- Campo precio del producto -->
-                <div class="form-group">
-                    <label for="precio">Precio</label>
-                    <input id="precio" class="form-control" type="number" step="0.01" name="price" required>
-                </div>
-
-                <!-- Campo url de la foto del producto -->
-                <div class="form-group">
-                    <label for="foto">Foto URL</label>
-                    <input id="foto" class="form-control" type="url" name="thumbnail">
-                </div>
-
-                <!-- Botón de envío -->
-                <button class="btn btn-success mt-3">Enviar</button>
-            </form>
-            <br>
-            <div id="productos"></div>
+            <ul class="nav nav-pills flex-column">
+                <li class="nav-item">
+                  <a class="nav-link active" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="productos.html">Productos</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="carritos.html">Carrito</a>
+                </li>
+              </ul>
         </div>       
     </div>
-
-    <script src="js/main.js"></script>
-
 </body>
 
 </html>
