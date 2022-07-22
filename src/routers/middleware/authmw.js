@@ -1,13 +1,11 @@
-const isAdmin = true;
-
-function verificarAdmin(req, res, next){
-    if(isAdmin)
+export function webAuth(req, res, next) {
+    if (req.isAuthenticated()) {
         next();
-    else
-        res.status(401).send({
-            error: -1,
-            descripcion: `La ruta ${req.baseUrl} metodo ${req.method} no autorizada`
-        });
+    } else {
+        res.status(401).redirect('/login');
+    }    
 }
 
-export default verificarAdmin;
+export function apiAuth(req, res, next) {
+    next();
+}

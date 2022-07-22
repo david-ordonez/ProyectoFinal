@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { productosDao as productos } from '../../daos/index.js'
-import verificarAdmin from '../middleware/authmw.js';
+import { apiAuth } from '../middleware/authmw.js';
 
 const productosRouter = new Router();
 
@@ -17,7 +17,7 @@ productosRouter.get('/:id',async (req, res) => {
     res.status(404).send({ error: 'Producto no encontrado' });
 })
 
-productosRouter.post('/', verificarAdmin, async (req, res) => {
+productosRouter.post('/', apiAuth, async (req, res) => {
     const newProducto = req.body;
     if (newProducto){
         const item = await productos.save(newProducto)
@@ -27,7 +27,7 @@ productosRouter.post('/', verificarAdmin, async (req, res) => {
     res.status(400).send({ error: 'Error al agregar' })
 })
 
-productosRouter.put('/:id', verificarAdmin, async (req, res) => {
+productosRouter.put('/:id', apiAuth, async (req, res) => {
     const id = parseInt(req.params.id);
     const nuevoProducto = req.body;
     const producto = await productos.getById(id)
@@ -36,7 +36,7 @@ productosRouter.put('/:id', verificarAdmin, async (req, res) => {
     res.status(404).send({ error: 'Producto no encontrado' });
 })
 
-productosRouter.delete('/:id', verificarAdmin,async (req, res) => {
+productosRouter.delete('/:id', apiAuth,async (req, res) => {
     const id = parseInt(req.params.id);
     const producto = await productos.getById(id)
     if (producto)
