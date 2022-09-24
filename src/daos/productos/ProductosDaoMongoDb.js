@@ -1,5 +1,5 @@
 import ContenedorMongoDb from "../../contenedores/ContenedorMongoDb.js"
-import * as model from '../models/producto.js'
+import * as model from '../../models/productos.model.js'
 
 class ProductosDaoMongoDb extends ContenedorMongoDb {
     

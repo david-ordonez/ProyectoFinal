@@ -3,9 +3,10 @@ import { fileURLToPath } from 'url';
 
 import path from 'path';
 import passport from "passport";
+import {v4 as uuid} from "uuid";
 import LocalStrategy from "passport-local";
 import bCrypt from 'bcrypt';
-import User from '../../models/usuarios.js'
+import User from '../../models/index.js'
 import { sendMail } from '../../utils/mail.js';
 import config from '../../config.js';
 
@@ -42,11 +43,11 @@ passport.use('login', new LocalStrategy(
         }
   
         const newUser = {
-            username: username,
+            _id: uuid(),
+            email: username,
             password: createHash(password),
             nombre: req.body.nombre,
             direccion: req.body.direccion,
-            fechaNac: req.body.fechaNac,
             telefono: req.body.telefono
         }
   

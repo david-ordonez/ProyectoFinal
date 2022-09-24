@@ -13,4 +13,4 @@ export const schema = mongoose.Schema({
     //avatar: String
 });
 
-export const Usuarios = mongoose.model(collection, schema);
+export const User = mongoose.model(collection, schema);
