@@ -1,9 +1,9 @@
 import ContenedorMongoDb from "../../contenedores/ContenedorMongoDb.js";
-import * as model from '../models/carrito.js'
+import * as model from '../../models/index.js'
 
 class CarritosDaoMongoDb extends ContenedorMongoDb {
     constructor() {
-        super(model.carrito);
+        super(model.Carritos);
     }
 }
 

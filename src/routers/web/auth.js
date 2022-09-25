@@ -6,7 +6,7 @@ import passport from "passport";
 import {v4 as uuid} from "uuid";
 import LocalStrategy from "passport-local";
 import bCrypt from 'bcrypt';
-import User from '../../models/index.js'
+import { User } from '../../models/index.js'
 import { sendMail } from '../../utils/mail.js';
 import config from '../../config.js';
 
