@@ -34,12 +34,8 @@ class ContenedorArchivo {
     }
 
     async listarAll() {
-        try {
-            const items = await fm.readFile(this.ruta);
-            return items;       
-        } catch (error) {
-            throw error;
-        }
+        const items = await fm.readFile(this.ruta);
+        return items;       
     }
 
     async borrar(id) {
@@ -54,7 +50,7 @@ class ContenedorArchivo {
 
     async borrarAll() {
         try {
-            const data = await fm.saveFile(this.ruta, '');
+            await fm.saveFile(this.ruta, '');
         } catch (error) {
             console.log(error);
         }
@@ -65,11 +61,12 @@ class ContenedorArchivo {
             const items = await fm.readFile(this.ruta);
             const oldItemIndex = items.findIndex(element => element.id === id);
             if(oldItemIndex == -1 ) 
-                throw new error('Elemento no encontrado');
+                throw new Error('Elemento no encontrado');
             
             const oldItem = items[oldItemIndex];
             
             Object.keys(oldItem).forEach(key => {
+                // eslint-disable-next-line no-prototype-builtins
                 if(item.hasOwnProperty(key))
                     oldItem[key] = item[key];
             });

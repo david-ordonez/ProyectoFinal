@@ -48,7 +48,7 @@ class ContenedorFirebase {
     }
 
     async actualizar(id, item){
-        const doc = query.doc(`${id}`);
+        const doc = this.query.doc(`${id}`);
         let itemUpdated = await doc.update(item);
         return itemUpdated;
     }    

@@ -1,3 +1,4 @@
+/* eslint-disable no-case-declarations */
 let productosDao;
 let carritosDao;
 
