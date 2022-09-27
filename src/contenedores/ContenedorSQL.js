@@ -1,9 +1,9 @@
-import knex from 'knex'
+import knex from 'knex';
 
 class ContenedorSQL {
     constructor(config, tabla) {
-        this.knex = knex(config)
-        this.tabla = tabla
+        this.knex = knex(config);
+        this.tabla = tabla;
     }
 
     async guardar(item) {
@@ -31,4 +31,4 @@ class ContenedorSQL {
     }    
 }
 
-export default ContenedorSQL
+export default ContenedorSQL;

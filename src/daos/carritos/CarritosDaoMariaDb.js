@@ -1,5 +1,5 @@
-import ContenedorSQL from "../../contenedores/ContenedorSQL.js"
-import config from '../../config.js'
+import ContenedorSQL from '../../contenedores/ContenedorSQL.js';
+import config from '../../config.js';
 
 class CarritosDaoMariaDb extends ContenedorSQL {
     constructor(){
@@ -7,4 +7,4 @@ class CarritosDaoMariaDb extends ContenedorSQL {
     }
 }
 
-export default CarritosDaoMariaDb
+export default CarritosDaoMariaDb;

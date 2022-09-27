@@ -1,5 +1,5 @@
-import ContenedorArchivo from "../../contenedores/ContenedorArchivo.js"
-import config from '../../config.js'
+import ContenedorArchivo from '../../contenedores/ContenedorArchivo.js';
+import config from '../../config.js';
 
 class ProductosDaoArchivo extends ContenedorArchivo {
     constructor() {
@@ -7,4 +7,4 @@ class ProductosDaoArchivo extends ContenedorArchivo {
     }
 }
 
-export default ProductosDaoArchivo
+export default ProductosDaoArchivo;

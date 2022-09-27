@@ -1,5 +1,5 @@
-import mongoose from 'mongoose'
-import config from '../config.js'
+import mongoose from 'mongoose';
+import config from '../config.js';
 
 class ContenedorMongoDb {
 
@@ -34,4 +34,4 @@ class ContenedorMongoDb {
     }    
 }
 
-export default ContenedorMongoDb
+export default ContenedorMongoDb;

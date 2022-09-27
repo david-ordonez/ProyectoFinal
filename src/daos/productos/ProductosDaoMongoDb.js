@@ -1,5 +1,5 @@
-import ContenedorMongoDb from "../../contenedores/ContenedorMongoDb.js"
-import * as model from '../../models/index.js'
+import ContenedorMongoDb from '../../contenedores/ContenedorMongoDb.js';
+import * as model from '../../models/index.js';
 
 class ProductosDaoMongoDb extends ContenedorMongoDb {
     
@@ -8,4 +8,4 @@ class ProductosDaoMongoDb extends ContenedorMongoDb {
     }
 }
 
-export default ProductosDaoMongoDb
+export default ProductosDaoMongoDb;

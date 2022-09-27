@@ -1,1 +1,1 @@
-export const asPOJO = obj => JSON.parse(JSON.stringify(obj))
+export const asPOJO = obj => JSON.parse(JSON.stringify(obj));

@@ -1,4 +1,4 @@
-import { productosDao as productos } from '../daos/index.js'
+import { productosDao as productos } from '../daos/index.js';
 
 export default class ServiciosProductos {
     constructor(){

@@ -1,4 +1,4 @@
-import ServiciosProductos from "../services/productos.js";
+import ServiciosProductos from '../services/productos.js';
 
 export default class ControladorProductos {
     constructor(){
@@ -13,7 +13,7 @@ export default class ControladorProductos {
             res.status(500).json({ error: error.message });
             throw error;
         }
-    }
+    };
 
     getProducto = async(req,res) => {
         try {
@@ -24,7 +24,7 @@ export default class ControladorProductos {
             res.status(500).json({ error: error.message });
             throw error;
         }
-    }
+    };
 
     borrarProducto = async(req,res) => {
         try {
@@ -35,7 +35,7 @@ export default class ControladorProductos {
             res.status(500).json({ error: error.message });
             throw error;
         }
-    }
+    };
 
     guardarProducto = async (req,res) => {
         try {
@@ -46,7 +46,7 @@ export default class ControladorProductos {
             console.log('error al guardar productos', error);
             res.status(500).json({ error: error.message });
         }
-    }
+    };
 
     actualizarProducto = async (req,res) => {
         try {
@@ -58,5 +58,5 @@ export default class ControladorProductos {
             console.log('error al actualizar productos', error);
             res.status(500).json({ error: error.message });            
         }
-    }
+    };
 }

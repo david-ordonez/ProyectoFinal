@@ -1,11 +1,11 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 const collection = 'ordenes';
 
 const schemaItems = mongoose.Schema({ 
     nombre: {type: String, required: true, max: 100},
     cantidad: Number
- })
+});
 
 export const schema = mongoose.Schema({
     _id: { type: String, required: true },

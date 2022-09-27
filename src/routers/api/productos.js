@@ -7,8 +7,8 @@ const productosController = new ControladorProductos();
 
 productosRouter.get('/', productosController.getProductos);
 productosRouter.get('/:id', productosController.getProducto);
-productosRouter.post('/', apiAuth, productosController.guardarProducto)
-productosRouter.put('/:id', apiAuth, productosController.actualizarProducto)
-productosRouter.delete('/:id', productosController.borrarProducto)
+productosRouter.post('/', apiAuth, productosController.guardarProducto);
+productosRouter.put('/:id', apiAuth, productosController.actualizarProducto);
+productosRouter.delete('/:id', productosController.borrarProducto);
 
 export default productosRouter;

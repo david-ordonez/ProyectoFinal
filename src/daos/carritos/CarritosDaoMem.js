@@ -1,4 +1,4 @@
-import ContenedorMemoria from "../../contenedores/ContenedorMemoria.js"
+import ContenedorMemoria from '../../contenedores/ContenedorMemoria.js';
 
 class CarritosDaoMem extends ContenedorMemoria {
     constructor(){
@@ -6,4 +6,4 @@ class CarritosDaoMem extends ContenedorMemoria {
     }
 }
 
-export default CarritosDaoMem
+export default CarritosDaoMem;

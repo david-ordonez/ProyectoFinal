@@ -1,5 +1,5 @@
-import ContenedorSQL from "../../contenedores/ContenedorSQL.js"
-import config from '../../config.js'
+import ContenedorSQL from '../../contenedores/ContenedorSQL.js';
+import config from '../../config.js';
 
 
 class CarritosDaoSQLite3 extends ContenedorSQL {
@@ -8,4 +8,4 @@ class CarritosDaoSQLite3 extends ContenedorSQL {
     }
 }
 
-export default CarritosDaoSQLite3
+export default CarritosDaoSQLite3;

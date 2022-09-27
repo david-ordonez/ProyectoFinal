@@ -1,5 +1,5 @@
-import admin from "firebase-admin"
-import config from '../config.js'
+import admin from 'firebase-admin';
+import config from '../config.js';
 
 class ContenedorFirebase {
     constructor(collection) {
@@ -49,9 +49,9 @@ class ContenedorFirebase {
 
     async actualizar(id, item){
         const doc = query.doc(`${id}`);
-        let itemUpdated = await doc.update(item)
+        let itemUpdated = await doc.update(item);
         return itemUpdated;
     }    
 }
 
-export default ContenedorFirebase
+export default ContenedorFirebase;

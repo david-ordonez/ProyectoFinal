@@ -2,17 +2,17 @@ import { Router } from 'express';
 import { fileURLToPath } from 'url';
 
 import path from 'path';
-import passport from "passport";
-import {v4 as uuid} from "uuid";
-import LocalStrategy from "passport-local";
+import passport from 'passport';
+import {v4 as uuid} from 'uuid';
+import LocalStrategy from 'passport-local';
 import bCrypt from 'bcrypt';
-import { User } from '../../models/index.js'
+import { User } from '../../models/index.js';
 import { sendMail } from '../../utils/mail.js';
 import config from '../../config.js';
 
 
 const __dirname = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../../views/');
-const authWebRouter = new Router()
+const authWebRouter = new Router();
 
 passport.use('login', new LocalStrategy(
     (username, password, done) => {
@@ -29,11 +29,11 @@ passport.use('login', new LocalStrategy(
             return done(null, user);
         });
     }
-  ));
+));
   
-  passport.use('signup', new LocalStrategy({
+passport.use('signup', new LocalStrategy({
     passReqToCallback: true
-  }, (req, username, password, done) => {
+}, (req, username, password, done) => {
     User.findOne({ 'username': username }, (err, user) => {
         if (err) {
             return done(err);
@@ -49,7 +49,7 @@ passport.use('login', new LocalStrategy(
             nombre: req.body.nombre,
             direccion: req.body.direccion,
             telefono: req.body.telefono
-        }
+        };
   
         User.create(newUser, async (err, userWithId) => {
             if (err) {
@@ -59,25 +59,25 @@ passport.use('login', new LocalStrategy(
             await sendMail(config.mailAdmin, JSON.stringify(newUser));
 
             return done(null, userWithId);
-        })
-    })
-  }));
+        });
+    });
+}));
   
-  passport.serializeUser((user, done) => {
+passport.serializeUser((user, done) => {
     done(null, user._id);
-  })
+});
   
-  passport.deserializeUser((id, done) => {
+passport.deserializeUser((id, done) => {
     User.findById(id, done);
-  });
+});
   
-  function isValidPassword(user, password) {
+function isValidPassword(user, password) {
     return bCrypt.compareSync(password, user.password);
-  }
+}
   
-  function createHash(password) {
+function createHash(password) {
     return bCrypt.hashSync(password, bCrypt.genSaltSync(10), null);
-  }
+}
 
 authWebRouter.get('/', (req, res) => {
     res.redirect('/login');
@@ -86,7 +86,7 @@ authWebRouter.get('/', (req, res) => {
 authWebRouter.get('/login', (req, res) => {
     if(req.isAuthenticated()){
         req.session.nombre = req.username;
-        return res.redirect('/home')
+        return res.redirect('/home');
     }
     res.sendFile('login.html', { root: __dirname});
 });
@@ -133,4 +133,4 @@ authWebRouter.get('/failsignup', (req, res) => {
 });
 
 
-export default authWebRouter
+export default authWebRouter;
