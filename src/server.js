@@ -9,6 +9,7 @@ import logger from './utils/logger.js';
 
 import productosRouter from './routers/api/productos.js';
 import carritoRouter from './routers/api/carritos.js';
+import ordenesRouter from './routers/api/ordenes.js';
 import authWebRouter from './routers/web/auth.js';
 import homeWebRouter from './routers/web/home.js';
 
@@ -41,6 +42,7 @@ app.use(passport.session());
 // servidor
 app.use('/api/productos', productosRouter);
 app.use('/api/carrito', carritoRouter);
+app.use('/api/ordenes', ordenesRouter);
 app.use('/', homeWebRouter);
 app.use('/', authWebRouter);
 app.use(logError);
