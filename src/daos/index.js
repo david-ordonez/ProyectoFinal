@@ -1,6 +1,7 @@
 /* eslint-disable no-case-declarations */
 let productosDao;
 let carritosDao;
+let ordenesDao;
 
 switch (process.env.PERS) {
 case 'json':
@@ -21,9 +22,11 @@ case 'firebase':
 case 'mongodb':
     const { default: ProductosDaoMongoDb } = await import('./productos/ProductosDaoMongoDb.js');
     const { default: CarritosDaoMongoDb } = await import('./carritos/CarritosDaoMongoDb.js');
+    const { default: OrdenesDaoMongoDb } = await import('./ordenes/OrdenesDaoMongoDb.js');
 
     productosDao = new ProductosDaoMongoDb();
     carritosDao = new CarritosDaoMongoDb();
+    ordenesDao = new OrdenesDaoMongoDb();
     break;
         
 case 'mariadb':
@@ -47,4 +50,4 @@ default:
     break;
 }
 
-export { productosDao, carritosDao };
+export { productosDao, carritosDao, ordenesDao};

@@ -139,5 +139,5 @@ producto
 | Parametro | Tipo     | Descripcion                       |
 | :-------- | :------- | :-------------------------------- |
 | `id`      | `number` | **Requerido**. Id del carrito    |
-| `id_prod`      | `number` | **Requerido**. Id del producto    |
+| `id_prod` | `number` | **Requerido**. Id del producto    |
 
