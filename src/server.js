@@ -15,6 +15,7 @@ import homeWebRouter from './routers/web/home.js';
 
 import cluster from 'cluster';
 import os  from 'os';
+import dotenv from 'dotenv';
 
 
 const app = express();
@@ -23,6 +24,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
+
+dotenv.config();
 
 app.use(
     session({

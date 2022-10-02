@@ -1,23 +1,23 @@
 export default {
     mailOptions : {
-        from: 'Servidor Node.js',
+        from: process.env.MAIL_FROM ||'Servidor Node.js',
         to: '',
         subject: 'Nuevo registro',
         html: '',
     },
-    mailHost : 'daordonezg@gmail.com',
-    mailClave: 'tiqwjnxulmcbptwu',
-    mailService: 'gmail',
-    mailPort: 587,
-    mailAdmin: 'david.ordonez@live.com.mx',
-    contactoAdmin: '+5215534027869',
+    mailHost : process.env.MAIL_HOST || 'daordonezg@gmail.com',
+    mailClave: process.env.MAIL_CLAVE || 'tiqwjnxulmcbptwu',
+    mailService: process.env.MAIL_SERVICE || 'gmail',
+    mailPort: process.env.MAIL_PORT || 587,
+    mailAdmin: process.env.MAIL_ADMIN || 'david.ordonez@live.com.mx',
+    contactoAdmin: process.env.CONTACTO_ADMIN='+5215534027869',
     tipoInicio : process.env.INICIO || 'fork',
     port: process.env.PORT || 8080,
     fileSystem: {
-        dbFolder: './DB/',
+        dbFolder: process.env.DB_FOLDER || './DB/',
     },
     mongodb: {
-        mongoUrl: 'mongodb+srv://dordonez:00Gd801011_@cluster0.thmqy.mongodb.net/ecommerce',
+        mongoUrl: process.env.MONGO_URL || 'mongodb+srv://dordonez:00Gd801011_@cluster0.thmqy.mongodb.net/ecommerce',
         mongoOptions: { 
             useNewUrlParser: true, 
             useUnifiedTopology: true 
