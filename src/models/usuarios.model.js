@@ -9,7 +9,7 @@ export const schema = mongoose.Schema({
     nombre: {type: String, required: true, max: 50},
     direccion: {type: String, required: true, max: 255},
     telefono: {type: String, required: true, max: 20},
-    foto: {type: String, required: true}
+    foto: {type: String}
     //avatar: String
 });
 
